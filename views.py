@@ -2,34 +2,73 @@ from app import app
 from flask import render_template
 import json
 from collections import Counter
-from data import new_data, projectData
+from data import *
 from chartdata import *
+from chartvulns import *
 
 
 @app.route('/')
 def home():
 
-	return render_template('home.html')
+	return render_template('home.html',)
 
-@app.route('/projects')
-def projects():
+@app.route('/charts')
+def charts():
 
-	return render_template('mappings/projects.html', projectData=projectData)
+	return render_template('charts.html',							
+							riskLow=riskLow,
+							riskMedium=riskMedium,
+							riskHigh=riskHigh,
+							riskCritical=riskCritical,
+							dummyLow=dummyLow,
+							dummyMedium=dummyMedium,
+							dummyHigh=dummyHigh,
+							dummyCritical=dummyCritical,
+							testLow=testLow,
+							testMedium=testMedium,
+							testHigh=testHigh,
+							testCritical=testCritical,
+							monthlyLow=monthlyLow,
+							monthlyMedium=monthlyMedium,
+							monthlyHigh=monthlyHigh,
+							monthlyCritical=monthlyCritical,
+							lowRisksClosed=lowRisksClosed,
+							mediumRisksClosed=mediumRisksClosed,
+							highRisksClosed=highRisksClosed,
+							criticalRisksClosed=criticalRisksClosed,
+							vulnLow=vulnLow,
+							vulnMedium=vulnMedium,
+							vulnHigh=vulnHigh,
+							vulnCritical=vulnCritical,
+							lowVulnsClosed=lowVulnsClosed,
+							mediumVulnsClosed=mediumVulnsClosed,
+							highVulnsClosed=highVulnsClosed,
+							criticalVulnsClosed=criticalVulnsClosed,
+							lowRisks=lowRisks,
+							mediumRisks=mediumRisks,
+							highRisks=highRisks,
+							criticalRisks=criticalRisks
+							)
 
-@app.route('/programme')
-def programme():
+@app.route('/mappings')
+def mappings():
 
-	return render_template('mappings/programme.html', projectData=projectData)
+	return render_template('mappings/mappings.html',new_data=new_data)
 
 @app.route('/mappingOne')
 def mappingOne():
 
 	return render_template('mappings/mappingOne.html',new_data=new_data)
 
-@app.route('/mappings')
-def mappings():
+@app.route('/mappingTwo')
+def mappingTwo():
 
-	return render_template('mappings/mappings.html',new_data=new_data)
+	return render_template('mappings/mappingTwo.html',new_data=new_data)
+
+@app.route('/mappingThree')
+def mappingThree():
+
+	return render_template('mappings/mappingThree.html',new_data=new_data)
 
 @app.route('/groupmappings')
 def groupmappings():
@@ -68,35 +107,8 @@ def mappingsdetail(id):
 
 	return render_template('mappings/mappingsdetail.html',new_data=new_data, key=key,summary=summary)
 
-@app.route('/riskdetail/<id>')
-def riskdetail(id):
 
-	for item in new_data['items']:
-		if item['Key'] == (id):
-			key = (item['Key'])
-			summary = (item['Summary'])
-			rating = (item['Rating'])
-			status = (item['Status'])
-			owner =(item['Risk Owner'])
-		for link in item['parent']:
-			parentItem = link['Key']
-			if link['Key'] == (item['Key']):
-				newItem = (item['Key'])
-				newItemSummary = (item['Summary'])
-			#print('Parent Link: ' + parentItem)
-		for link in item['child']:
-			childItem = link['Key']
-			#print('Child Link: ' + childItem)	
-
-	return render_template('riskdetail.html',new_data=new_data,
-											 key=key,  
-											 rating=rating,
-											 summary=summary, 
-											 status=status,
-											 owner=owner,
-											 childItem=childItem,
-											 parentItem=parentItem)
-
+#BRANDS
 
 @app.route('/group')
 def group():
@@ -109,6 +121,14 @@ def group():
 										groupCriticalData=groupCriticalData, 
 										pbxtotalCount=pbxtotalCount)
 
+@app.route('/photobox')
+def photobox():
+
+	return render_template('photobox.html',new_data=new_data, 
+										   photoboxLowData = photoboxLowData,photoboxMediumData=photoboxMediumData,
+										   photoboxHighData=photoboxHighData,photoboxCriticalData=photoboxCriticalData)
+
+
 
 @app.route('/techops')
 def techops():
@@ -119,7 +139,7 @@ def techops():
 	for item in new_data['items']:
 		if item['Issuetype'] =='RISK' and  item['Status'] !='Closed' and (item['Status'] != 'Fixed') and (item['Status'] != 'Not a Risk'):
 			for component in item['Components']:
-				if component['name'] == "TechOps":
+				if component['name'] == "TechOps" or component['name'] == "PBX-Webops":
 					techopsRisks+=1
 
 	techopsCount = ("TechOps: {} Risks".format(techopsRisks))
@@ -127,6 +147,11 @@ def techops():
 
 	return render_template('pbx_group/techops.html',new_data=new_data,
 											 techopsCount=techopsCount)
+
+@app.route('/techopsmap')
+def techopsmap():
+
+	return render_template('pbx_group/techopsmap.html', new_data=new_data)
 
 @app.route('/webops')
 def webops():
@@ -157,15 +182,15 @@ def architecture():
 				if component['name'] == "PBX-Architecture":
 					architectureRisks+=1
 
-	architectureCount = ("Architecture: {} Risks".format(architectureRisks))
+	architectureCount = ("Group Architecture: {} Risks".format(architectureRisks))
 	print(architectureCount)
 
 	return render_template('pbx_group/architecture.html',new_data=new_data,
 											 architectureCount=architectureCount)
 
 
-@app.route('/prod')
-def prod():
+@app.route('/productioneng')
+def productioneng():
 	prodRisks = 0
 
 	counter=Counter()
@@ -175,10 +200,10 @@ def prod():
 				if component['name'] == "PBX-Production-Eng":
 					prodRisks+=1
 
-	prodCount = ("Production Engineering: {} Risks".format(prodRisks))
+	prodCount = ("Production & Factories: {} Risks".format(prodRisks))
 	print(prodCount)
 
-	return render_template('photobox/prod.html',new_data=new_data,
+	return render_template('pbx_group/productioneng.html',new_data=new_data,
 									   prodCount=prodCount)
 
 @app.route('/photoscience')
@@ -190,34 +215,15 @@ def photoscience():
 	for item in new_data['items']:
 		if item['Issuetype'] =='RISK' and  item['Status'] !='Closed' and (item['Status'] != 'Fixed') and (item['Status'] != 'Not a Risk'):
 			for component in item['Components']:
-				if component['name'] == "PBX-imageupload":
+				if component['name'] == "PBX-imageupload" or component['name'] == "PBX-Data":
 					photoscienceRisks+=1
 				
 
-	photoscienceCount= ("Photoscience: {} Risks".format(photoscienceRisks))
+	photoscienceCount= ("AI Machine Learning & Images: {} Risks".format(photoscienceRisks))
 	print(photoscienceCount)
 
 	return render_template('pbx_group/photoscience.html',new_data=new_data,
 											   photoscienceCount=photoscienceCount)
-
-@app.route('/groupsecurity')
-def groupsecurity():
-
-	groupSecurityRisks = 0
-
-	counter=Counter()
-	for item in new_data['items']:
-		if item['Issuetype'] =='RISK' and  item['Status'] !='Closed' and (item['Status'] != 'Fixed') and (item['Status'] != 'Not a Risk'):
-			for component in item['Components']:
-				if component['name'] == "Group-Security":
-					groupSecurityRisks+=1
-				
-
-	groupSecurityCount= ("Group Security : {} Risks".format(groupSecurityRisks))
-	print(groupSecurityCount)
-
-	return render_template('pbx_group/groupsecurity.html',new_data=new_data,
-												groupSecurityCount=groupSecurityCount)
 
 @app.route('/businessintel')
 def businessintel():
@@ -238,6 +244,26 @@ def businessintel():
 	return render_template('pbx_group/businessintel.html',new_data=new_data,
 												businessintelCount=businessintelCount)
 
+
+@app.route('/groupsecurity')
+def groupsecurity():
+
+	groupSecurityRisks = 0
+
+	counter=Counter()
+	for item in new_data['items']:
+		if item['Issuetype'] =='RISK' and  item['Status'] !='Closed' and (item['Status'] != 'Fixed') and (item['Status'] != 'Not a Risk'):
+			for component in item['Components']:
+				if component['name'] == "Group-Security":
+					groupSecurityRisks+=1
+				
+
+	groupSecurityCount= ("Group Security : {} Risks".format(groupSecurityRisks))
+	print(groupSecurityCount)
+
+	return render_template('pbx_group/groupsecurity.html',new_data=new_data,
+												groupSecurityCount=groupSecurityCount)
+
 @app.route('/hr')
 def hr():
 
@@ -257,12 +283,24 @@ def hr():
 	return render_template('pbx_group/hr.html',new_data=new_data,
 												hrCount=hrCount)
 
-@app.route('/photobox')
-def photobox():
+@app.route('/producteng')
+def producteng():
 
-	return render_template('photobox.html',new_data=new_data, 
-										   photoboxLowData = photoboxLowData,photoboxMediumData=photoboxMediumData,
-										   photoboxHighData=photoboxHighData,photoboxCriticalData=photoboxCriticalData)
+	productengRisks = 0
+
+	counter=Counter()
+	for item in new_data['items']:
+		if item['Issuetype'] =='RISK' and  item['Status'] !='Closed' and (item['Status'] != 'Fixed') and (item['Status'] != 'Not a Risk'):
+			for component in item['Components']:
+				if component['name'] == "PBX-Babel" or component['name'] == "PBX-Studio" or component['name'] == "PBX-Shop" or component['name'] == "PBX-checkout" or component['name'] == "PBX-NativeApps":
+					productengRisks+=1
+				
+
+	productCount= ("Product Engineering: {} Risks".format(productengRisks))
+	print(productCount)
+
+	return render_template('pbx_group/producteng.html',new_data=new_data,
+												productCount=productCount)
 
 
 @app.route('/babel')
@@ -355,6 +393,57 @@ def mobile():
 	return render_template('photobox/mobile.html',new_data=new_data,
 										 mobileAppCount=mobileAppCount)
 
+
+@app.route('/moonpigtech')
+def moonpigtech():
+	moonpigtechRisks = 0
+
+	counter=Counter()
+	for item in new_data['items']:
+		if item['Issuetype'] =='RISK' and  item['Status'] !='Closed' and (item['Status'] != 'Fixed') and (item['Status'] != 'Not a Risk'):
+			for component in item['Components']:
+				if component['name'] == "Moonpig-Risk":
+					moonpigtechRisks+=1
+
+	moonpigtechCount = ("Moonpig Tech: {} Risks".format(moonpigRisks))
+	print(moonpigtechCount)
+
+	return render_template('pbx_group/moonpigtech.html',new_data=new_data,
+										 moonpigtechCount=moonpigCount)
+
+@app.route('/postertech')
+def postertech():
+	postertechRisks = 0
+
+	counter=Counter()
+	for item in new_data['items']:
+		if item['Issuetype'] =='RISK' and  item['Status'] !='Closed' and (item['Status'] != 'Fixed') and (item['Status'] != 'Not a Risk'):
+			for component in item['Components']:
+				if component['name'] == "posterXXL-Risk":
+					postertechRisks+=1
+
+	postertechCount = ("poster Tech: {} Risks".format(posterRisks))
+	print(postertechCount)
+
+	return render_template('pbx_group/postertech.html',new_data=new_data,
+										 postertechCount=posterCount)
+
+@app.route('/hofmanntech')
+def hofmanntech():
+	hofmanntechRisks = 0
+
+	counter=Counter()
+	for item in new_data['items']:
+		if item['Issuetype'] =='RISK' and  item['Status'] !='Closed' and (item['Status'] != 'Fixed') and (item['Status'] != 'Not a Risk'):
+			for component in item['Components']:
+				if component['name'] == "Hofmann-Risk":
+					hofmanntechRisks+=1
+
+	hofmanntechCount = ("hofmann Tech: {} Risks".format(hofmannRisks))
+	print(hofmanntechCount)
+
+	return render_template('pbx_group/hofmanntech.html',new_data=new_data,
+										 hofmanntechCount=hofmannCount)
 
 @app.route('/moonpig')
 def moonpig():
@@ -559,6 +648,42 @@ def ikdetails():
 	return render_template('ikdetails.html',new_data=new_data)
 
 
+@app.route('/riskdetail/<id>')
+def riskdetail(id):
+
+	for item in new_data['items']:
+		if item['Key'] == (id):
+			key = (item['Key'])
+			summary = (item['Summary'])
+			rating = (item['Rating'])
+			status = (item['Status'])
+			owner =(item['Risk Owner'])
+		for link in item['parent']:
+			parentItem = link['Key']
+			if link['Key'] == (item['Key']):
+				newItem = (item['Key'])
+				newItemSummary = (item['Summary'])
+			#print('Parent Link: ' + parentItem)
+		for link in item['child']:
+			childItem = link['Key']
+			#print('Child Link: ' + childItem)	
+
+	return render_template('riskdetail.html',new_data=new_data,
+											 key=key,  
+											 rating=rating,
+											 summary=summary, 
+											 status=status,
+											 owner=owner,
+											 childItem=childItem,
+											 parentItem=parentItem)
 
 
+@app.route('/projects')
+def projects():
 
+	return render_template('mappings/projects.html', projectData=projectData)
+
+@app.route('/programme')
+def programme():
+
+	return render_template('mappings/programme.html', projectData=projectData)

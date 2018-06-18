@@ -3,11 +3,11 @@
 
 {% block content %}
 <br>
-<div class="container-fluid">
+<div class="container">
   <table class="table">
     <tbody>
-      <tr style="background-color: #8fc43d; color: #fff">
-          <td><h2><center>Level One and Two Risks</center><h2></td>
+            <tr style="background-image: url({{url_for('static', filename='images/texture-bw.png')}}) ;color: #000; text-transform: uppercase; ">
+          <td><h2><center>Level 1 & 2</center><h2></td>
       </tr>
     </tbody>
   </table>
@@ -16,47 +16,49 @@
 
 <div class="container">
 
-<table class="table">
+<table class="table table-borderless" style="empty-cells: hide;">
   <thead>
-    <tr>
-      <th scope="col">Key</th>
-      <th scope="col">Summary</th>
-      <th scope="col">Key</th>
-      <th scope="col">Summary</th>
 
+    <tr>
+    <tr>
+      <th scope="col" style="background-color: #8fc43d; color: #fff">Level 1</th>
+      <th scope="col" style="background-color: #8fc43d; color: #fff">Level 2</th>
+    </tr>
     </tr>
   </thead>
   <tbody style="font-size: 12px">
       {% for item in new_data['items'] %}
+      {% if item['Status'] !='Closed' and item['Status'] != 'Fixed' and item['Status'] != 'Not a Risk' %}
       {% for component in item['Components'] %}
       {% if component['name'] == "Level1Risk" %}
          <tr> 
-            <td class="typeR col-md-1" ><a href="{{url_for('riskdetail', id=item['Key']) }}"><span class="statusType">{{ item['Key'] }}</a></span> </td>
-            <td>{{ item['Summary'] }}</td>
+            <td class="col-sm-1"><a href="https://jira.photobox.com/browse/{{ item['Key'] }}" target="_blank">{{ item['Summary'] }}</a></td>
          </tr>
+
       {% for link in item['parent'] %}
+      {% if link['Status'] !='Closed' and item['Status'] != 'Fixed' %}
       {% set parentItem = link['Key'] %}
-      {% for item in new_data['items'] %}
-      {% if parentItem == item['Key'] %}
-      {% set newKey = item['Key'] %}
-      {% set newSummary = item['Summary'] %}
+      {% set parentSum = link['Summary'] %}
+
                   <tr>
-                     <td></td>
-                     <td></td>
-                     <td class="typeR col-md-1"><a href="{{url_for('riskdetail', id=newKey) }}"><span class="statusType">{{ newKey }}</a></span></td>
-                     <td>{{newSummary}}</td>
+                    <td class="col-sm-1"></td>
+                     <td class="col-sm-1"><a href="https://jira.photobox.com/browse/{{ parentItem }}" target="_blank">{{ parentSum}}</a></td>
                   </tr>
-                   
-      {% endif %}          
-      {% endfor %}
-      {% endfor %}
-      {% endif %}
-      {% endfor %}
-      {% endfor %}
+           
+<!--LINK TWO/ONE -->
+{% endif %}      
+{% endfor %}
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endfor %}
 
   </tbody>
 
 </table>
 
 </div>
+
+
+
 {% endblock %}

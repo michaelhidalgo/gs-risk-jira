@@ -31,13 +31,13 @@
   <tbody style="font-size: 12px">
       {% for item in new_data['items'] %}
       {% if item['Key'] == key  %}
-      {% if item['Status'] !='Closed' and item['Status'] != 'Fixed' %}
+      {% if item['Status'] !='Closed' and item['Status'] != 'Fixed' and item['Status'] != 'Not a Risk' %}
          <tr> 
             <td class="col-sm-1"><a href="https://jira.photobox.com/browse/{{ item['Key'] }}" target="_blank">{{ item['Summary'] }}</a></td>
          </tr>
 
       {% for link in item['parent'] %}
-      {% if link['Status'] !='Closed' and item['Status'] != 'Fixed' %}
+      {% if link['Status'] !='Closed' and link['Status'] != 'Fixed' and link['Status'] != 'Not a Risk' %}
       {% set parentItem = link['Key'] %}
       {% set parentSum = link['Summary'] %}
 
@@ -49,7 +49,7 @@
       {% for item in new_data['items'] %}
       {% if parentItem == item['Key'] %}
       {% for linkThree in item['parent'] %}
-      {% if linkThree['Status'] !='Closed' and item['Status'] != 'Fixed' %}
+      {% if linkThree['Status'] !='Closed' and linkThree['Status'] != 'Fixed' and linkThree['Status'] != 'Not a Risk' %}
       {% set keyThree = linkThree['Key'] %}
       {% set sumThree = linkThree['Summary'] %}
 
@@ -63,7 +63,7 @@
       {% for item in new_data['items'] %}
       {% if keyThree == item['Key'] %}
       {% for linkFour in item['parent'] %}
-      {% if linkFour['Status'] !='Closed' and item['Status'] != 'Fixed' %}
+      {% if linkFour['Status'] !='Closed' and linkFour['Status'] != 'Fixed' and linkFour['Status'] != 'Not a Risk'%}
       {% set keyFour = linkFour['Key'] %}
       {% set sumFour = linkFour['Summary'] %}
 
@@ -79,7 +79,7 @@
       {% for item in new_data['items'] %}
       {% if keyFour == item['Key'] %}
       {% for linkFive in item['parent'] %}
-      {% if linkFive['Status'] !='Closed' and item['Status'] != 'Fixed' %}
+      {% if linkFive['Status'] !='Closed' and linkFive['Status'] != 'Fixed' and linkFive['Status'] != 'Not a Risk' %}
       {% set keyFive = linkFive['Key'] %}
       {% set sumFive = linkFive['Summary'] %}
 

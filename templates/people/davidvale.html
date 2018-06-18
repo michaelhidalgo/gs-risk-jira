@@ -65,7 +65,7 @@
       {% for item in new_data['items'] %}
       {% if keyThree == item['Key'] %}
       {% for linkFour in item['parent'] %}
-      {% if linkFour['Status'] !='Closed' and item['Status'] != 'Fixed' and item['Risk Owner'] == 'David VALE' %}
+      {% if linkFour['Status'] !='Closed' and linkFour['Status'] != 'Fixed' and item['Risk Owner'] == 'David VALE' %}
       {% set keyFour = linkFour['Key'] %}
       {% set sumFour = linkFour['Summary'] %}
 

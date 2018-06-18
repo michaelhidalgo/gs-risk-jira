@@ -1,0 +1,402 @@
+{% extends 'layout.html' %}
+{% block title %}Photobox SOC Weekly Report{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid" id="canvas-table">
+    <br>
+  <div class="row">
+    <div class="col-md-6">
+      <table class="table">
+
+              <tbody style="font-size: 12px;">
+              <tr class="table-primary">
+
+              	<canvas id="line-chart" width="600" height="450"></canvas>
+
+              </tr>
+            </tbody>
+      </table>
+    </div>
+
+    <div class="col-md-6">
+      <table class="table">
+
+              <tbody style="font-size: 12px;">
+              <tr class="table-primary">
+
+              	<canvas id="line-chart-two" width="600" height="450"></canvas>
+
+              </tr>
+            </tbody>
+      </table>
+    </div>
+  </div >
+</div>
+
+<div class="container-fluid" id="canvas-table">
+    <br>
+  <div class="row">
+
+    <div class="col-md-6">
+      <table class="table">
+
+              <tbody style="font-size: 12px;">
+              <tr class="table-primary">
+
+              	<canvas id="line-chart-four" width="600" height="450"></canvas>
+
+              </tr>
+            </tbody>
+      </table>
+    </div>
+
+
+
+    <div class="col-md-6">
+      <table class="table">
+
+              <tbody style="font-size: 12px;">
+              <tr class="table-primary">
+
+              	<canvas id="line-chart-three" width="600" height="450"></canvas>
+
+              </tr>
+            </tbody>
+      </table>
+    </div>
+
+
+  </div >
+</div>
+
+<div class="container-fluid" id="canvas-table">
+    <br>
+  <div class="row">
+
+    <div class="col-md-6">
+      <table class="table">
+
+              <tbody style="font-size: 12px;">
+              <tr class="table-primary">
+
+              	<canvas id="vuln-chart" width="600" height="450"></canvas>
+
+              </tr>
+            </tbody>
+      </table>
+    </div>
+
+
+
+    <div class="col-md-6">
+      <table class="table">
+
+              <tbody style="font-size: 12px;">
+              <tr class="table-primary">
+
+              	<canvas id="vuln-chart-two" width="600" height="450"></canvas>
+
+              </tr>
+            </tbody>
+      </table>
+    </div>
+
+
+  </div >
+</div>
+
+<div class="container-fluid" id="canvas-table">
+    <br>
+  <div class="row">
+
+    <div class="col-md-6">
+      <table class="table">
+
+              <tbody style="font-size: 12px;">
+              <tr class="table-primary">
+
+              	<canvas id="vuln-chart-three" width="600" height="450"></canvas>
+
+              </tr>
+            </tbody>
+      </table>
+    </div>
+
+
+
+  </div >
+</div>
+
+
+<script>
+	
+new Chart(document.getElementById("line-chart"), {
+  type: 'line',
+  data: {
+    labels: ['Apr 17','May 17','Jun 17','Jul 17','Aug 17','Sep 17','Oct 17', 'Nov 17', 'Dec 17','Jan 18','Feb 18','Mar 18','Apr 18','May 18'],
+    datasets: [{ 
+        data: {{dummyLow}},
+        label: "Low",
+        borderColor: "#39818e",
+        fill: false
+
+      }, { 
+        data: {{dummyMedium}},
+        label: "Medium",
+        borderColor: "#fcd549"
+
+      }, { 
+        data: {{dummyHigh}},
+        label: "High",
+        borderColor: "#f77524"
+
+      }, { 
+        data: {{dummyCritical}},
+        label: "Critical",
+        borderColor: "#c81837"
+
+      }
+    ]
+  },
+  options: {
+    title: {
+      display: true,
+      text: 'Open Risks'
+    }
+  }
+});
+
+new Chart(document.getElementById("line-chart-two"), {
+  type: 'line',
+  data: {
+    labels: ['Apr 17','May 17','Jun 17','Jul 17','Aug 17','Sep 17','Oct 17', 'Nov 17', 'Dec 17','Jan 18','Feb 18','Mar 18','Apr 18','May 18'],
+    datasets: [{ 
+        data: {{testLow}},
+        label: "Low",
+        borderColor: "#39818e",
+        fill: false
+
+      }, { 
+        data: {{testMedium}},
+        label: "Medium",
+        borderColor: "#fcd549",
+        fill: false
+
+      }, { 
+        data: {{testHigh}},
+        label: "High",
+        borderColor: "#f77524",
+        fill: false
+
+      }, { 
+        data: {{testCritical}},
+        label: "Critical",
+        borderColor: "#c81837",
+        fill:false
+      }
+    ]
+  },
+  options: {
+    title: {
+      display: true,
+      text: ' Total Risks Created'
+    }
+  }
+});
+
+new Chart(document.getElementById("line-chart-three"), {
+  type: 'line',
+  data: {
+    labels: ['Apr 17','May 17','Jun 17','Jul 17','Aug 17','Sep 17','Oct 17', 'Nov 17', 'Dec 17','Jan 18','Feb 18','Mar 18','Apr 18','May 18'],
+    datasets: [{ 
+        data: {{monthlyLow}},
+        label: "Low",
+        borderColor: "#39818e",
+        fill: false
+
+      }, { 
+        data: {{monthlyMedium}},
+        label: "Medium",
+        borderColor: "#fcd549",
+        fill: false
+
+      }, { 
+        data: {{monthlyHigh}},
+        label: "High",
+        borderColor: "#f77524",
+        fill: false
+
+      }, { 
+        data: {{monthlyCritical}},
+        label: "Critical",
+        borderColor: "#c81837",
+        fill:false
+      }
+    ]
+  },
+  options: {
+    title: {
+      display: true,
+      text: ' Risks Created Vs Closed by Month'
+    }
+  }
+});
+
+new Chart(document.getElementById("line-chart-four"), {
+  type: 'line',
+  data: {
+    labels: ['Apr 17','May 17','Jun 17','Jul 17','Aug 17','Sep 17','Oct 17', 'Nov 17', 'Dec 17','Jan 18','Feb 18','Mar 18','Apr 18','May 18'],
+    datasets: [{ 
+        data: {{lowRisksClosed}},
+        label: "Low",
+        borderColor: "#39818e",
+        fill: false
+
+      }, { 
+        data: {{mediumRisksClosed}},
+        label: "Medium",
+        borderColor: "#fcd549",
+        fill: false
+
+      }, { 
+        data: {{highRisksClosed}},
+        label: "High",
+        borderColor: "#f77524",
+        fill: false
+
+      }, { 
+        data: {{criticalRisksClosed}},
+        label: "Critical",
+        borderColor: "#c81837",
+        fill:false
+      }
+    ]
+  },
+  options: {
+    title: {
+      display: true,
+      text: ' Risks Closed'
+    }
+  }
+});
+
+new Chart(document.getElementById("vuln-chart"), {
+  type: 'line',
+  data: {
+    labels: ['Apr 17','May 17','Jun 17','Jul 17','Aug 17','Sep 17','Oct 17', 'Nov 17', 'Dec 17','Jan 18','Feb 18','Mar 18','Apr 18','May 18'],
+    datasets: [{ 
+        data: {{vulnLow}},
+        label: "Low",
+        borderColor: "#39818e"
+
+      }, { 
+        data: {{vulnMedium}},
+        label: "Medium",
+        borderColor: "#fcd549"
+
+      }, { 
+        data: {{vulnHigh}},
+        label: "High",
+        borderColor: "#f77524"
+
+      }, { 
+        data: {{vulnCritical}},
+        label: "Critical",
+        borderColor: "#c81837"
+
+      }
+    ]
+  },
+  options: {
+    title: {
+      display: true,
+      text: 'Open Vulnerabilites'
+    }
+  }
+});
+
+
+new Chart(document.getElementById("vuln-chart-two"), {
+  type: 'line',
+  data: {
+    labels: ['Apr 17','May 17','Jun 17','Jul 17','Aug 17','Sep 17','Oct 17', 'Nov 17', 'Dec 17','Jan 18','Feb 18','Mar 18','Apr 18','May 18'],
+    datasets: [{ 
+        data: {{lowVulnsClosed}},
+        label: "Low",
+        borderColor: "#39818e",
+        fill: false
+
+      }, { 
+        data: {{mediumVulnsClosed}},
+        label: "Medium",
+        borderColor: "#fcd549",
+        fill: false
+
+      }, { 
+        data: {{highVulnsClosed}},
+        label: "High",
+        borderColor: "#f77524",
+        fill: false
+
+      }, { 
+        data: {{criticalVulnsClosed}},
+        label: "Critical",
+        borderColor: "#c81837",
+        fill:false
+      }
+    ]
+  },
+  options: {
+    title: {
+      display: true,
+      text: ' Vulnerabilites Closed'
+    }
+  }
+});
+
+new Chart(document.getElementById("vuln-chart-three"), {
+  type: 'line',
+  data: {
+    labels: ['Apr 17','May 17','Jun 17','Jul 17','Aug 17','Sep 17','Oct 17', 'Nov 17', 'Dec 17','Jan 18','Feb 18','Mar 18','Apr 18','May 18'],
+    datasets: [{ 
+        data: {{lowRisks}},
+        label: "Low",
+        borderColor: "#39818e",
+        fill: false
+
+      }, { 
+        data: {{mediumRisks}},
+        label: "Medium",
+        borderColor: "#fcd549",
+        fill: false
+
+      }, { 
+        data: {{highRisks}},
+        label: "High",
+        borderColor: "#f77524",
+        fill: false
+
+      }, { 
+        data: {{criticalRisks}},
+        label: "Critical",
+        borderColor: "#c81837",
+        fill:false
+      }
+    ]
+  },
+  options: {
+    title: {
+      display: true,
+      text: ' Risks Opened '
+    }
+  }
+});
+
+
+
+
+
+</script>
+
+{% endblock %}

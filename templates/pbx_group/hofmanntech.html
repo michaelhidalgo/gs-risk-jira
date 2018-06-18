@@ -2,26 +2,26 @@
 {% block title %}Photobox Risks{% endblock %}
 
 {% block content %}
-
 <br>
+
 <div class="container-fluid">
   <table class="table" id="title-table">
     <tbody>
       <tr style="background-image: url({{url_for('static', filename='images/texture-bw.png')}}) ;color: #000; text-transform: uppercase; ">
-          <td><center><h1>{{productCount}}</h1></center></td>
+          <td><center><h1>{{hofmanntechCount}}</h1></center></td>
       </tr>
     </tbody>
   </table>
 </div>
 
 <div class="container-fluid" id="risk-legend">
- <span class="tag">PBX-Group-Risk</span>
- <span class="tag">TechOps</span>
+ <span class="tag">Hofmann-Risk</span>
  <span class="critical">Critical</span>
  <span class="high">High</span>
  <span class="medium">Medium</span>
  <span class="low">Low</span>
 </div>
+
 
 
 
@@ -46,7 +46,7 @@
 					  	{% for item in new_data['items'] %}
                             {% if item['Rating'] == 'Critical' and item['Status'] !='Closed' and item['Status'] != 'Fixed' and item['Status'] != 'Not a Risk' %}
                                 {% for component in item['Components'] %}
-                                    {% if component['name'] == "PBX-Babel"or component['name'] == "PBX-Studio" or component['name'] == "PBX-Shop" or component['name'] == "PBX-checkout" or component['name'] == "PBX-NativeApps" %}
+                                    {% if component['name'] == "Hofmann-Risk" %}
                                         <tr class="table-primary">
                                             <td class="col-risk-key"        > <a href="https://jira.photobox.com/browse/{{ item['Key'] }}" target="_blank"> {{item['Key']}}</a></td>
                                             <td class="col-risk-summary"    > {{item['Summary']}}</td>
@@ -80,7 +80,7 @@
 					  	{% for item in new_data['items'] %}
 					    {% if item['Rating'] == 'High' and item['Status'] !='Closed' and item['Status'] != 'Fixed' and item['Status'] != 'Not a Risk' %}
 					    {% for component in item['Components'] %}
-					    {% if component['name'] == "PBX-Babel"or component['name'] == "PBX-Studio" or component['name'] == "PBX-Shop" or component['name'] == "PBX-checkout" or component['name'] == "PBX-NativeApps" %}
+					    {% if component['name'] == "Hofmann-Risk" %}
 						    <tr class="table-primary">
 
 							    <td class="col-risk-key"        > <a href="https://jira.photobox.com/browse/{{ item['Key'] }}" target="_blank"> {{item['Key']}}</a></td>
@@ -116,7 +116,7 @@
 					  	{% for item in new_data['items'] %}
 					    {% if item['Rating'] == 'Medium' and item['Status'] !='Closed' and item['Status'] != 'Fixed' and item['Status'] != 'Not a Risk' %}
 					    {% for component in item['Components'] %}
-					    {% if component['name'] == "PBX-Babel"or component['name'] == "PBX-Studio" or component['name'] == "PBX-Shop" or component['name'] == "PBX-checkout" or component['name'] == "PBX-NativeApps" %}
+					    {% if component['name'] == "Hofmann-Risk" %}
 						    <tr class="table-primary">
 
 							    <td class="col-risk-key"        > <a href="https://jira.photobox.com/browse/{{ item['Key'] }}" target="_blank"> {{item['Key']}}</a></td>
@@ -152,7 +152,7 @@
 					  	{% for item in new_data['items'] %}
 					    {% if item['Rating'] == 'Low' and item['Status'] !='Closed' and item['Status'] != 'Fixed' and item['Status'] != 'Not a Risk' %}
 					    {% for component in item['Components'] %}
-					    {% if component['name'] == "PBX-Babel"or component['name'] == "PBX-Studio" or component['name'] == "PBX-Shop" or component['name'] == "PBX-checkout" or component['name'] == "PBX-NativeApps" %}
+					    {% if component['name'] == "Hofmann-Risk" %}
 						    <tr class="table-primary">
 
 							    <td class="col-risk-key"         > <a href="https://jira.photobox.com/browse/{{ item['Key'] }}" target="_blank"> {{item['Key']}}</a></td>
