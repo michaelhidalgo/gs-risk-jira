@@ -42,15 +42,11 @@
                 <li class="active"><a href="{{ url_for('home') }}">Home</a></li>  
 
                 <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Risks by Brand<span class="caret"></span></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Risk Charts<span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">                  
                   <li><a href="{{ url_for('brand') }}">All Brands</a></li>
                   <li role="separator" class="divider"></li>
-                  <li><a href="{{ url_for('group') }}">Photobox Group</a></li>
-                  <li><a href="{{ url_for('photobox') }}">Photobox</a></li>
-                  <li><a href="{{ url_for('moonpig') }}">Moonpig</a></li>
-                  <li><a href="{{ url_for('hofmann') }}">Hofmann</a></li>
-                  <li><a href="{{ url_for('posterXXL') }}">posterXXL</a></li>
+                  <li><a href="{{ url_for('charts') }}">Photobox Group Charts</a></li>
                 </ul>
               </li>
 
@@ -58,8 +54,8 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Risks by Function<span class="caret"></span></a>
                 
                 <ul class="dropdown-menu" role="menu">                  
-                  <li><a href="{{ url_for('architecture') }}">Architecture</a></li>
-                  <li><a href="{{ url_for('prod') }}">Production and Factories</a></li>
+                  <li><a href="{{ url_for('architecture') }}">Group Architecture</a></li>
+                  <li><a href="{{ url_for('productioneng') }}">Production and Factories</a></li>
                   <li class="dropdown-submenu">
                       <a tabindex="-1" href="{{ url_for('photoscience') }}">AI Machine Learning and Images<i class="fa fa-chevron-right"></i></a>
                       <ul class="dropdown-menu">                    
@@ -74,18 +70,8 @@
                       </ul>
                   </li>
                   <li><a href="{{ url_for('hr') }}">Human Resources</a></li>
-                  <li role="separator" class="divider"></li>
                   <li class="dropdown-submenu">
-                      <a tabindex="-1">Moonpig Tech<i class="fa fa-chevron-right"></i></a>
-                      <ul class="dropdown-menu">                    
-                        <li><a tabindex="-1" href="{{ url_for('mpecommerce') }}">Ecommerce</a></li>
-                        <li><a href="{{ url_for('mpmobile') }}">Mobile Application</a></li>
-                        <li><a href="{{ url_for('moonpigpci') }}">Moonpig PCI Risk Register</a></li>
-                      </ul>
-                  </li>
-                  <li><a href="{{ url_for('prod') }}">Photobox Engineering</a></li>
-                  <li class="dropdown-submenu">
-                      <a tabindex="-1" href="{{ url_for('photobox') }}">Products<i class="fa fa-chevron-right"></i></a>
+                      <a tabindex="-1" href="{{ url_for('producteng') }}">Product Engineering<i class="fa fa-chevron-right"></i></a>
                       <ul class="dropdown-menu">                    
                         <li><a tabindex="-1" href="{{ url_for('babel') }}">Babel</a></li>  
                         <li><a href="{{ url_for('studio') }}">RC Studio</a></li>
@@ -94,47 +80,26 @@
                          <li><a href="{{ url_for('mobile') }}">Mobile App</a></li>
                       </ul>
                   </li>
-                </ul>
-              </li>
+                  <li class="dropdown-submenu">
+                      <a tabindex="-1" href="{{ url_for('moonpigtech') }}">Moonpig Tech<i class="fa fa-chevron-right"></i></a>
+                      <ul class="dropdown-menu">                    
+                        <li><a tabindex="-1" href="{{ url_for('mpecommerce') }}">Ecommerce</a></li>
+                        <li><a href="{{ url_for('mpmobile') }}">Mobile Application</a></li>
+                      </ul>
+                  </li>
 
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Risks by People<span class="caret"></span></a>
-                
-                <ul class="dropdown-menu" role="menu">                  
-                  <li><a href="{{ url_for('davidvale') }}">David Vale</a></li>
-                  <li><a href="{{ url_for('iankershaw') }}">Ian Kershaw</a></li>
-                  <li class="dropdown-submenu">
-                      <a tabindex="-1" href="{{ url_for('photoscience') }}">AI Machine Learning and Images<i class="fa fa-chevron-right"></i></a>
+                    <li class="dropdown-submenu">
+                      <a tabindex="-1" href="{{ url_for('hofmanntech') }}">Hofmann Tech<i class="fa fa-chevron-right"></i></a>
                       <ul class="dropdown-menu">                    
-                  <li><a href="{{ url_for('businessintel') }}">Business Intelligence and Data</a></li>
+                        <li><a tabindex="-1" href="{{ url_for('babel') }}">Hofmann Engineering</a></li>  
+                        <li><a href="{{ url_for('studio') }}">Hofmann Application</a></li>
                       </ul>
                   </li>
-                  <li><a href="{{ url_for('groupsecurity') }}">Group Security</a></li>
-                  <li class="dropdown-submenu">
-                      <a tabindex="-1" href="{{ url_for('techops') }}">TechOps<i class="fa fa-chevron-right"></i></a>
+                    <li class="dropdown-submenu">
+                      <a tabindex="-1" href="{{ url_for('postertech') }}">posterXXL Tech<i class="fa fa-chevron-right"></i></a>
                       <ul class="dropdown-menu">                    
-                         <li><a href="{{ url_for('webops') }}">WebOps</a></li>
-                      </ul>
-                  </li>
-                  <li><a href="{{ url_for('hr') }}">Human Resources</a></li>
-                  <li role="separator" class="divider"></li>
-                  <li class="dropdown-submenu">
-                      <a tabindex="-1">Moonpig Tech<i class="fa fa-chevron-right"></i></a>
-                      <ul class="dropdown-menu">                    
-                        <li><a tabindex="-1" href="{{ url_for('mpecommerce') }}">Ecommerce</a></li>
-                        <li><a href="{{ url_for('mpmobile') }}">Mobile Application</a></li>
-                        <li><a href="{{ url_for('moonpigpci') }}">Moonpig PCI Risk Register</a></li>
-                      </ul>
-                  </li>
-                  <li><a href="{{ url_for('prod') }}">Photobox Engineering</a></li>
-                  <li class="dropdown-submenu">
-                      <a tabindex="-1" href="{{ url_for('photobox') }}">Products<i class="fa fa-chevron-right"></i></a>
-                      <ul class="dropdown-menu">                    
-                        <li><a tabindex="-1" href="{{ url_for('babel') }}">Babel</a></li>  
-                        <li><a href="{{ url_for('studio') }}">RC Studio</a></li>
-                         <li><a href="{{ url_for('shop') }}">RC Shop</a></li>
-                         <li><a href="{{ url_for('checkout') }}">Checkout</a></li>
-                         <li><a href="{{ url_for('mobile') }}">Mobile App</a></li>
+                        <li><a tabindex="-1" href="{{ url_for('babel') }}">posterXXL Engineering</a></li>  
+                        <li><a href="{{ url_for('studio') }}">posterXXL Web</a></li>
                       </ul>
                   </li>
                 </ul>
@@ -144,23 +109,13 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Risk Mappings<span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">                  
                   <li class="dropdown-submenu">
-                      <a tabindex="-1" href="{{ url_for('mappings') }}">Full Mappings<i class="fa fa-chevron-right"></i></a>
+                      <a tabindex="-1">Risk Mappings<i class="fa fa-chevron-right"></i></a>
                       <ul class="dropdown-menu">
                         <li><a tabindex="-1" href="{{ url_for('mappings') }}">Full Risk Mappings</a></li>
                         <li><a href="{{ url_for('mappingOne') }}">Top Level Risks</a></li>
-                        <li role="separator" class="divider"></li>
-                         <li><a href="{{ url_for('projects') }}">Full Project Mappings</a></li>
-                          <li><a href="{{ url_for('programme') }}">Full Programme Mappings</a></li>
-                      </ul>
-                  </li>
-                      <li class="dropdown-submenu">
-                      <a tabindex="-1" href="{{ url_for('mappings') }}">Mapping by Brand<i class="fa fa-chevron-right"></i></a>
-                      <ul class="dropdown-menu">
-                        <li><a tabindex="-1" href="{{ url_for('groupmappings') }}">Photobox Group</a></li>
-                        <li><a href="{{ url_for('photoboxmappings') }}">Photobox</a></li>
-                        <li><a href="{{ url_for('moonpigmappings') }}">Moonpig</a></li>                
-                        <li><a href="{{ url_for('hofmannmappings') }}">Hofmann</a></li>
-                        <li><a href="{{ url_for('posterxxlmappings') }}">posterXXL</a></li>
+                        <li><a href="{{ url_for('mappingTwo') }}">Top Level Risks & Taxonomy</a></li>
+                        <li><a href="{{ url_for('mappingThree') }}">Top Level Risks & Taxonomy & System</a></li>
+
                       </ul>
                   </li>
                 </ul>

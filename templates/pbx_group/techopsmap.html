@@ -7,7 +7,7 @@
   <table class="table" id="title-table">
     <tbody>
             <tr style="background-image: url({{url_for('static', filename='images/texture-bw.png')}}) ;color: #000; text-transform: uppercase; ">
-          <td><h2><center>Full Risk Mappings</center><h2></td>
+          <td><h2><center>TechOps Mappings</center><h2></td>
       </tr>
     </tbody>
   </table>
@@ -19,7 +19,6 @@
 <table class="table table-borderless" style="empty-cells: hide;">
   <thead>
 
-
     <tr>
       <th scope="col" style="background-color: #8fc43d; color: #fff">Level 1</th>
       <th scope="col" style="background-color: #8fc43d; color: #fff">Level 2</th>
@@ -27,11 +26,10 @@
       <th scope="col" style="background-color: #c81837; color: #fff">Risks</th>
       <th scope="col" style="background-color: #f77524; color: #fff">Vulnerabilities</th>
     </tr>
-
   </thead>
   <tbody style="font-size: 12px">
       {% for item in new_data['items'] %}
-      {% if item['Status'] !='Closed' and item['Status'] != 'Fixed' and item['Status'] != 'Not a Risk' %}
+      {% if item['Status'] !='Closed' and item['Status'] != 'Fixed' %}
       {% for component in item['Components'] %}
       {% if component['name'] == "Level1Risk" %}
          <tr> 
@@ -51,7 +49,7 @@
       {% for item in new_data['items'] %}
       {% if parentItem == item['Key'] %}
       {% for linkThree in item['parent'] %}
-      {% if linkThree['Status'] !='Closed' and linkThree['Status'] != 'Fixed' and linkThree['Status'] != 'Not a Risk' %}
+      {% if linkThree['Status'] !='Closed' and item['Status'] != 'Fixed' %}
       {% set keyThree = linkThree['Key'] %}
       {% set sumThree = linkThree['Summary'] %}
 
@@ -65,7 +63,7 @@
       {% for item in new_data['items'] %}
       {% if keyThree == item['Key'] %}
       {% for linkFour in item['parent'] %}
-      {% if linkFour['Status'] !='Closed' and linkFour['Status'] != 'Fixed' and linkFour['Status'] != 'Not a Risk' %}
+      {% if linkFour['Status'] !='Closed' and linkFour['Status'] != 'Fixed' and item['Risk Owner'] == 'David VALE' %}
       {% set keyFour = linkFour['Key'] %}
       {% set sumFour = linkFour['Summary'] %}
 
@@ -81,7 +79,7 @@
       {% for item in new_data['items'] %}
       {% if keyFour == item['Key'] %}
       {% for linkFive in item['parent'] %}
-      {% if linkFive['Status'] !='Closed' and linkFive['Status'] != 'Fixed' and linkFive['Status'] != 'Not a Risk' %}
+      {% if linkFive['Status'] !='Closed' and item['Status'] != 'Fixed' %}
       {% set keyFive = linkFive['Key'] %}
       {% set sumFive = linkFive['Summary'] %}
 
