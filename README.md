@@ -29,3 +29,15 @@ this step will require a valid connection to a JIRA server
 ### Execution instructions
 
 run app using python3 app.py
+
+
+### update instuctions
+
+to update run
+
+1) python3 models.py
+2) python3 datapull_projects.py
+
+run app using
+
+3) python3 app.py
