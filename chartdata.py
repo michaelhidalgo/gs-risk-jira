@@ -1,5 +1,5 @@
 from collections import Counter
-from data import *
+from readData import *
 
 # Photobox Group Data
 
@@ -9,8 +9,6 @@ architecture = 0
 productionEng = 0
 photos = 0
 hr = 0
-
-
 
 for item in new_data['items']:
 	if item['Issuetype'] =='RISK' and item['Status'] !='Closed' and item['Status'] != 'Fixed' and item['Status'] !='Not a Risk':
@@ -34,18 +32,8 @@ architectureCount = ("Architecture {}".format(techops))
 productionEngCount = ("Production Engineering {}".format(techops))
 photoCount = ("PhotoScience {}".format(techops))
 hrCount = ("Human Resources {}".format(hr))
-#print(techops)
-#print(groupsecurity)
-#print(architecture)
-#print(productionEng)
-#print(photos)
-#print(hr)
 pbxtotal = techops + groupsecurity + architecture + productionEng + photos + hr
 pbxtotalCount = ("Group Total Risks {}".format(pbxtotal))
-#print(pbxtotalCount)
-
-
-
 
 groupLowData = []
 groupMediumData = []
@@ -266,7 +254,6 @@ for item in new_data['items']:
 		counter['tbd_not_fixed']+=1
 
 totalRisks = sum(counter.values())
-#print(totalRisks)
 
 ###### Risks by Brand
 
@@ -302,12 +289,6 @@ hofmannCount = ("Hofmann Risk {}".format(hofmannRisks))
 posterCount = ("Poster Risk {}".format(posterRisks))
 gsCount = ("Group Security under review {}".format(gsRisks))
 openRisks = photoboxRisks + groupRisks + moonpigRisks +posterRisks + hofmannRisks
-
-#print(openRisks)
-
-
-#exceptions = totalRisks - openRisks
-#print(exceptions)
 
 groupData = []
 moonpigData = []

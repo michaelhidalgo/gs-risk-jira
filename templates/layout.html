@@ -90,17 +90,49 @@
 
                     <li class="dropdown-submenu">
                       <a tabindex="-1" href="{{ url_for('hofmanntech') }}">Hofmann Tech<i class="fa fa-chevron-right"></i></a>
-                      <ul class="dropdown-menu">                    
-                        <li><a tabindex="-1" href="{{ url_for('babel') }}">Hofmann Engineering</a></li>  
-                        <li><a href="{{ url_for('studio') }}">Hofmann Application</a></li>
-                      </ul>
                   </li>
                     <li class="dropdown-submenu">
                       <a tabindex="-1" href="{{ url_for('postertech') }}">posterXXL Tech<i class="fa fa-chevron-right"></i></a>
+                  </li>
+                </ul>
+              </li>
+
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Vulnerabilities by Function<span class="caret"></span></a>
+                
+                <ul class="dropdown-menu" role="menu">                  
+                  <li><a href="{{ url_for('architecture') }}">Group Architecture</a></li>
+                  <li><a href="{{ url_for('productioneng') }}">Production and Factories</a></li>
+                  <li class="dropdown-submenu">
+                      <a tabindex="-1" href="{{ url_for('photoscience') }}">AI Machine Learning and Images<i class="fa fa-chevron-right"></i></a>
                       <ul class="dropdown-menu">                    
-                        <li><a tabindex="-1" href="{{ url_for('babel') }}">posterXXL Engineering</a></li>  
-                        <li><a href="{{ url_for('studio') }}">posterXXL Web</a></li>
+                  <li><a href="{{ url_for('businessintel') }}">Business Intelligence and Data</a></li>
                       </ul>
+                  </li>
+                  <li><a href="{{ url_for('groupsecurity') }}">Group Security</a></li>
+                  <li class="dropdown-submenu">
+                      <a tabindex="-1" href="{{ url_for('techops') }}">TechOps<i class="fa fa-chevron-right"></i></a>
+                      <ul class="dropdown-menu">                    
+                         <li><a href="{{ url_for('webops') }}">WebOps</a></li>
+                      </ul>
+                  </li>
+                  <li><a href="{{ url_for('hr') }}">Human Resources</a></li>
+                  <li class="dropdown-submenu">
+                      <a tabindex="-1" href="{{ url_for('productengVulns') }}">Product Engineering<i class="fa fa-chevron-right"></i></a>
+                  </li>
+                  <li class="dropdown-submenu">
+                      <a tabindex="-1" href="{{ url_for('moonpigtech') }}">Moonpig Tech<i class="fa fa-chevron-right"></i></a>
+                      <ul class="dropdown-menu">                    
+                        <li><a tabindex="-1" href="{{ url_for('mpecommerce') }}">Ecommerce</a></li>
+                        <li><a href="{{ url_for('mpmobile') }}">Mobile Application</a></li>
+                      </ul>
+                  </li>
+
+                    <li class="dropdown-submenu">
+                      <a tabindex="-1" href="{{ url_for('hofmanntech') }}">Hofmann Tech<i class="fa fa-chevron-right"></i></a>
+                  </li>
+                    <li class="dropdown-submenu">
+                      <a tabindex="-1" href="{{ url_for('postertech') }}">posterXXL Tech<i class="fa fa-chevron-right"></i></a>
                   </li>
                 </ul>
               </li>

@@ -55,6 +55,7 @@
       {% set keyThree = linkThree['Key'] %}
       {% set sumThree = linkThree['Summary'] %}
 
+
                   <tr>
                     <td class="col-sm-1"></td>
                     <td class="col-sm-1"></td>     
@@ -68,12 +69,13 @@
       {% if linkFour['Status'] !='Closed' and linkFour['Status'] != 'Fixed' and linkFour['Status'] != 'Not a Risk' %}
       {% set keyFour = linkFour['Key'] %}
       {% set sumFour = linkFour['Summary'] %}
+      {% set statusFour = linkFour['Status'] %}
 
                   <tr>
                     <td class="col-sm-1"></td>
                     <td class="col-sm-1"></td>
                     <td class="col-sm-1"></td>
-                    <td class="typeR col-sm-2"><a href="https://jira.photobox.com/browse/{{ keyFour }}" target="_blank"><span class="statusType">{{ keyFour }}</a></span><h4> {{ sumFour }}</h4></td>
+                    <td class="typeR col-sm-2"><a href="https://jira.photobox.com/browse/{{ keyFour }}" target="_blank"><span class="statusType">{{ keyFour }}</a></span><h4> {{ sumFour }} {{statusFour }}</h4></td>
                     
                   </tr>
 

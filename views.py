@@ -2,7 +2,7 @@ from app import app
 from flask import render_template
 import json
 from collections import Counter
-from data import *
+from readData import *
 from chartdata import *
 from chartvulns import *
 
@@ -70,45 +70,6 @@ def mappingThree():
 
 	return render_template('mappings/mappingThree.html',new_data=new_data)
 
-@app.route('/groupmappings')
-def groupmappings():
-
-	return render_template('mappings/groupmappings.html',new_data=new_data)
-
-@app.route('/photoboxmappings')
-def photoboxmappings():
-
-	return render_template('mappings/photoboxmappings.html',new_data=new_data)
-
-@app.route('/moonpigmappings')
-def moonpigmappings():
-
-	return render_template('mappings/moonpigmappings.html',new_data=new_data)
-
-@app.route('/hofmannmappings')
-def hofmannmappings():
-
-	return render_template('mappings/hofmannmappings.html',new_data=new_data)
-
-@app.route('/posterxxlmappings')
-def posterxxlmappings():
-
-	return render_template('mappings/posterxxlmappings.html',new_data=new_data)
-
-@app.route('/mappingsdetail/<id>')
-def mappingsdetail(id):
-
-	for item in new_data['items']:
-		for component in item['Components']:
-			if component['name'] == "Level1Risk":
-				if item['Key'] == (id):
-					key = (item['Key'])
-					summary = (item['Summary'])
-
-	return render_template('mappings/mappingsdetail.html',new_data=new_data, key=key,summary=summary)
-
-
-#BRANDS
 
 @app.route('/group')
 def group():
@@ -127,7 +88,6 @@ def photobox():
 	return render_template('photobox.html',new_data=new_data, 
 										   photoboxLowData = photoboxLowData,photoboxMediumData=photoboxMediumData,
 										   photoboxHighData=photoboxHighData,photoboxCriticalData=photoboxCriticalData)
-
 
 
 @app.route('/techops')
@@ -302,6 +262,26 @@ def producteng():
 	return render_template('pbx_group/producteng.html',new_data=new_data,
 												productCount=productCount)
 
+@app.route('/productengVulns')
+def productengVulns():
+
+	productengVulns = 0
+
+	counter=Counter()
+	for item in vulnData['items']:
+		if item['Status'] !='Closed' and (item['Status'] != 'Fixed') and (item['Status'] != 'Not a Risk'):
+			for component in item['Components']:
+				if component['name'] == "PBX-Babel" or component['name'] == "PBX-Studio" or component['name'] == "PBX-Shop" or component['name'] == "PBX-checkout" or component['name'] == "PBX-NativeApps":
+					productengVulns+=1
+				
+
+	productCount= ("Product Engineering : {} Vulnerabilites".format(productengVulns))
+
+
+	return render_template('pbx_group/productengVulns.html',vulnData=vulnData,
+															productCount=productCount)
+
+
 
 @app.route('/babel')
 def babel():
@@ -445,16 +425,6 @@ def hofmanntech():
 	return render_template('pbx_group/hofmanntech.html',new_data=new_data,
 										 hofmanntechCount=hofmannCount)
 
-@app.route('/moonpig')
-def moonpig():
-
-	return render_template('moonpig.html',new_data=new_data)
-
-@app.route('/moonpigpci')
-def moonpigpci():
-
-	return render_template('moonpig/moonpigpci.html',new_data=new_data, vulnData=vulnData)
-
 @app.route('/mpecommerce')
 def mpecommerce():
 	mpecommerceRisks = 0
@@ -489,105 +459,6 @@ def mpmobile():
 	return render_template('moonpig/mpMobile.html',new_data=new_data,
 										 mpMobileCount=mpMobileCount)
 
-@app.route('/hofmann')
-def hofmann():
-
-	return render_template('hofmann.html',new_data=new_data)
-
-@app.route('/desktopApp')
-def desktopApp():
-	desktopAppRisks = 0
-
-	counter=Counter()
-	for item in new_data['items']:
-		if item['Issuetype'] =='RISK' and  item['Status'] !='Closed' and (item['Status'] != 'Fixed') and (item['Status'] != 'Not a Risk'):
-			for component in item['Components']:
-				if component['name'] == " hofmann-desktop":
-					desktopAppRisks+=1
-
-	desktopAppCount = ("Desktop Application: {} Risks".format(desktopAppRisks))
-	print(desktopAppCount)
-
-	return render_template('hofmann/desktopapp.html',new_data=new_data,
-										 desktopAppCount=desktopAppCount)
-
-@app.route('/webandmobile')
-def webandmobile():
-	webandmobileRisks = 0
-
-	counter=Counter()
-	for item in new_data['items']:
-		if item['Issuetype'] =='RISK' and  item['Status'] !='Closed' and (item['Status'] != 'Fixed') and (item['Status'] != 'Not a Risk'):
-			for component in item['Components']:
-				if component['name'] == "hofmann-app":
-					webandmobileRisks+=1
-
-	webandmobileCount = ("Web & Mobile: {} Risks".format(webandmobileRisks))
-	print(webandmobileCount)
-
-	return render_template('hofmann/webandmobile.html',new_data=new_data,
-										 webandmobileCount=webandmobileCount)
-
-@app.route('/hfproductionEng')
-def hfproductionEng():
-	hfproductionEngRisks = 0
-
-	counter=Counter()
-	for item in new_data['items']:
-		if item['Issuetype'] =='RISK' and  item['Status'] !='Closed' and (item['Status'] != 'Fixed') and (item['Status'] != 'Not a Risk'):
-			for component in item['Components']:
-				if component['name'] == "Hofmann-Prod":
-					hfproductionEngRisks+=1
-
-	hfproductionEngCount = ("Production & Engineering: {} Risks".format(hfproductionEngRisks))
-	print(hfproductionEngCount)
-
-	return render_template('hofmann/hfproductioneng.html',new_data=new_data,
-										 hfproductionEngCount=hfproductionEngCount)
-
-@app.route('/posterXXL')
-def posterXXL():				
-
-	return render_template('posterXXL.html',new_data=new_data)
-
-@app.route('/pxlprod')
-def pxlprod():
-	pxlprodRisks = 0
-
-	counter=Counter()
-	for item in new_data['items']:
-		if item['Issuetype'] =='RISK' and  item['Status'] !='Closed' and (item['Status'] != 'Fixed') and (item['Status'] != 'Not a Risk'):
-			for component in item['Components']:
-				if component['name'] == "PXL-Prod":
-					pxlprodRisks+=1
-
-	pxlprodCount = ("Production & Engineering: {} Risks".format(pxlprodRisks))
-	print(pxlprodCount)
-
-	return render_template('poster/pxlprod.html',new_data=new_data,
-										 pxlprodCount=pxlprodCount)
-
-@app.route('/pxlmobileweb')
-def pxlmobileweb():
-	pxlmobilewebRisks = 0
-
-	counter=Counter()
-	for item in new_data['items']:
-		if item['Issuetype'] =='RISK' and  item['Status'] !='Closed' and (item['Status'] != 'Fixed') and (item['Status'] != 'Not a Risk'):
-			for component in item['Components']:
-				if component['name'] == "PXL-WebandMobile":
-					pxlmobilewebRisks+=1
-
-	pxlmobilewebCount = ("Mobile and Web: {} Risks".format(pxlmobilewebRisks))
-	print(pxlmobilewebCount)
-
-	return render_template('poster/pxlmobileweb.html',new_data=new_data,
-										 pxlmobilewebCount=pxlmobilewebCount)
-
-@app.route('/security')
-def security():
-
-	return render_template('security.html',new_data=new_data)
 
 
 @app.route('/brand')
@@ -609,43 +480,6 @@ def brand():
 										gsCount=gsCount,
 										openRisks=openRisks
 										)
-
-def owners(values):
-	owners = []
-	seen= list()
-
-
-	for value in values:
-		if value not in seen:
-			owners.append(value)
-			seenTwo.append(value)
-	return owners
-
-@app.route('/riskowners')
-def riskowners():
-
-	for item in new_data['items']:
-		values = item['Risk Owner']
-		result = owners(values)
-		print(result)
-
-	return render_template('people/riskowners.html', new_data=new_data)
-
-
-@app.route('/davidvale')
-def davidvale():
-
-	return render_template('people/davidvale.html',new_data=new_data)
-
-@app.route('/iankershaw')
-def iankershaw():
-
-	return render_template('people/iankershaw.html',new_data=new_data)
-
-@app.route('/ikdetails')
-def ikdetails():
-
-	return render_template('ikdetails.html',new_data=new_data)
 
 
 @app.route('/riskdetail/<id>')
@@ -676,14 +510,3 @@ def riskdetail(id):
 											 owner=owner,
 											 childItem=childItem,
 											 parentItem=parentItem)
-
-
-@app.route('/projects')
-def projects():
-
-	return render_template('mappings/projects.html', projectData=projectData)
-
-@app.route('/programme')
-def programme():
-
-	return render_template('mappings/programme.html', projectData=projectData)

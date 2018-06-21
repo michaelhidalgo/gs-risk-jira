@@ -1,5 +1,5 @@
 from collections import Counter
-from vulnData import *
+from readData import *
 
 counter = Counter()
 

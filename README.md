@@ -22,7 +22,7 @@ debug=True
 
 this step will require a valid connection to a JIRA server
 
-4) python3 datapull_projects.py
+4) python3 getrisks.py getvulns.py
 
 5) echo {} > techops.json
 
